@@ -4,5 +4,9 @@ The main goal is to use C# program to send image or text message to LINE app cha
 * Google Cloud Storage Client: https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp
 * Firebase Function and Firestore: https://firebase.google.com/docs/functions/write-firebase-functions
 
+<p align="center">
+<img src="/img/overview.JPG" height="90%" width="90%">  
+</p>
+
 As you can see from the above image of the structure of our program, there are many elements. 
 
