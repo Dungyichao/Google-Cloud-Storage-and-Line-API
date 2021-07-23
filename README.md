@@ -6,7 +6,7 @@ The main goal is to use C# program to send image or text message to LINE app cha
 * Google Cloud Storage Client: https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp
 * Firebase Function and Firestore: https://firebase.google.com/docs/functions/write-firebase-functions
 
-## 1.1 Program Structure
+## 1.1 Program Overview
 <p align="center">
 <img src="/image/overview1.jpg" height="90%" width="90%">  
   
@@ -24,3 +24,81 @@ As you can see from the above image of the structure of our program, there are m
   Steps to the goal 
 </p>
 
+# 2. Firebase Functions and Firestore Database
+Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL).
+
+```javascript
+const functions = require("firebase-functions");
+const fetch = require("node-fetch");
+var admin = require("firebase-admin");
+
+admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
+//var serviceAccount = require("path/to/serviceAccountKey.json");
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+
+ exports.helloWorld = functions.https.onRequest((request, response) => {
+   functions.logger.info("Hello logs!", {structuredData: true});
+   response.send("Hello from Firebase Line!");
+ });
+
+ exports.LineMessAPI = functions.https.onRequest((request, respond) => {
+    var event = request.body.events[0]
+    functions.logger.log(JSON.stringify(event));
+    var userId = event.source.userId;
+    var timestamp = event.timestamp;
+    var replyToken = event.replyToken;
+    var userText = ""
+    if (event.type === "message" && event.message.type === "text"){
+        userText = event.message.text
+    } else {
+        userText = "(Message type is not text)";
+    }
+    db.collection("chat-history").doc(timestamp.toString()).set({
+        "userId": userId,
+        "Message": userText,
+        "timestamp": timestamp
+    })
+
+    db.collection("Customer").doc(userId).get().then( returnData =>{
+        if (returnData.exists){
+          var name = returnData.data().name
+          var surname = returnData.data().surname
+          var nickname = returnData.data().nickname
+          reply_message(replyToken, `Hello ${nickname}(${name} ${surname})`)
+        } else {
+          reply_message(replyToken, "You are not the customer, Register?")
+        }
+        return null
+    }).catch(err => {
+        console.log(err)
+    })
+
+    return respond.status(200).send(request.method);
+});
+
+const LINE_HEADER = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer pb2iNzDae3d8lZotR+dufP5igReOzv8Rpcdsgrahnw0eH2ckKfhLAe4/WLXuvJrgN/fSt881Vfrk6iSrVcOGLAeYacnnaagyedudDiaHL7wPvFfsda35ldsasdfqCaXjs4wjIgJFRDmRWQdB04t89/1O/w1cDnyilFU="
+  }
+
+function reply_message(replytoken,textfrom){
+    fetch("https://api.line.me/v2/bot/message/reply",{
+        method: "post",
+        body:    JSON.stringify({
+            replyToken: replytoken,
+            messages: [
+              {
+                type: "text",
+                text: textfrom
+              }
+            ]
+          }),
+        headers: LINE_HEADER,
+    }).then(res => res.json())
+    .then(json => functions.logger.log(JSON.stringify(json)))
+}
+```
+Note that in ```"Authorization": "Bearer XXOOXX``` where XXOOXX is Channel access token configured in LINE Developer Console.
