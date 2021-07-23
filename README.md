@@ -24,7 +24,12 @@ As you can see from the above image of the structure of our program, there are m
   Steps to the goal 
 </p>
 
-# 2. Firebase Functions and Firestore Database
+# 2. LINE Developer Console Configuration
+Please follow the steps in the following LINE official link to configure your developer console.
+https://developers.line.biz/en/docs/messaging-api/getting-started/
+
+
+# 3. Firebase Functions and Firestore Database
 Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL).
 
 ```javascript
