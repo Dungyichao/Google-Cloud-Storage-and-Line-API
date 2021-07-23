@@ -5,7 +5,7 @@ The main goal is to use C# program to send image or text message to LINE app cha
 * Firebase Function and Firestore: https://firebase.google.com/docs/functions/write-firebase-functions
 
 <p align="center">
-<img src="/image/overview.jpg" height="90%" width="90%">  
+<img src="/image/overview1.jpg" height="90%" width="90%">  
   
   System structure
 </p>
