@@ -34,9 +34,10 @@ I would set the Auto-response messages status (In Response settings) to Off.
 Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL).
 
 ## 3.1 Firebase Functions
+Please go through following two link
 
-https://firebase.google.com/docs/functions/get-started
-https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API/blob/main/reference/%E2%80%9CLINE%20Messaging%20API%E2%80%9D%20x%20%E2%80%9CFirebase%20(Cloud...%2B%20Firestore)%E2%80%9D%20_%20by%20Siratee%20K.pdf
+1. How to start Firebase Function project: https://firebase.google.com/docs/functions/get-started
+2. How to make Firebase Functions work with LINE https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API/blob/main/reference/%E2%80%9CLINE%20Messaging%20API%E2%80%9D%20x%20%E2%80%9CFirebase%20(Cloud...%2B%20Firestore)%E2%80%9D%20_%20by%20Siratee%20K.pdf
 
 Use the following command to create Functions folder and related documents
 ```cmd
