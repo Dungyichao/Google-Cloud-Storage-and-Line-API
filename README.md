@@ -28,9 +28,63 @@ As you can see from the above image of the structure of our program, there are m
 Please follow the steps in the following LINE official link to configure your developer console.
 https://developers.line.biz/en/docs/messaging-api/getting-started/
 
+I would set the Auto-response messages status (In Response settings) to Off. 
 
 # 3. Firebase Functions and Firestore Database
 Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL).
+
+## 3.1 Firebase Functions
+
+https://firebase.google.com/docs/functions/get-started
+Use the following command to create Functions folder and related documents
+```cmd
+$npm install firebase-functions@latest firebase-admin@latest --save
+$npm install -g firebase-tools
+$firebase init functions
+```
+Some sample code would look like the following
+```javascript
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
+exports.addMessage = functions.https.onRequest(async (req, res) => {
+  const original = req.query.text;
+  const writeResult = await admin.firestore().collection('messages').add({original: original});
+  res.json({result: `Message with ID: ${writeResult.id} added.`});
+});
+```
+In ```.eslintrc.js``` which check your code rule, we need some modification to save our life.
+https://www.programmersought.com/article/46885832344/
+```json
+module.exports = {
+  root: true,
+  env: {
+    es6: true,
+    node: true,
+  },
+  extends: [
+    "eslint:recommended",
+  ],
+  rules: {
+    quotes: ["error", "double"],
+    "no-unused-vars":"off",
+  },
+};
+```
+Now you can deploy your function onto Firebase
+```cmd
+$firebase deploy --only functions
+```
+or
+```
+$firebase deploy --only "functions:HelloWorld"
+```
+Where HelloWorld is your function name.
+
+However, after you deploy, you might encounter error: Forbidden
+https://lukestoolkit.blogspot.com/2020/06/google-cloud-functions-error-forbidden.html
+Go to the following link: https://cloud.google.com/functions/list . Select your project. Check the check box of the function which you encounter error. Click on ```ADD MEMBER```. In the new members field, type in "allUsers" and select the "allUsers" option. In the "Select a role" dropdown, select Cloud Functions then Cloud Functions Invoker.
+
 
 ```javascript
 const functions = require("firebase-functions");
@@ -86,7 +140,7 @@ const db = admin.firestore();
 
 const LINE_HEADER = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer pb2iNzDae3d8lZotR+dufP5igReOzv8Rpcdsgrahnw0eH2ckKfhLAe4/WLXuvJrgN/fSt881Vfrk6iSrVcOGLAeYacnnaagyedudDiaHL7wPvFfsda35ldsasdfqCaXjs4wjIgJFRDmRWQdB04t89/1O/w1cDnyilFU="
+    "Authorization": "Bearer pb2iNzDae3dfP5igReOzv8Rpcdsgrahnw0eH2LAe4/WLXuvJrgN/VcOGLAe69wDiaHL7wPvFfsda35ldsasdfqCaXjs4wB04t89/1O/w1cDnyilFU="
   }
 
 function reply_message(replytoken,textfrom){
@@ -106,4 +160,4 @@ function reply_message(replytoken,textfrom){
     .then(json => functions.logger.log(JSON.stringify(json)))
 }
 ```
-Note that in ```"Authorization": "Bearer XXOOXX``` where XXOOXX is Channel access token configured in LINE Developer Console.
+Note that in ```"Authorization": "Bearer XXOOXX``` where XXOOXX is Channel access token configured in LINE Developer Console mentioned in previous section. You should keep the Channel access token secure.
