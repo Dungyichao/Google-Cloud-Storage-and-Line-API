@@ -6,6 +6,7 @@ The main goal is to use C# program to send image or text message to LINE app cha
 
 <p align="center">
 <img src="/image/overview.jpg" height="90%" width="90%">  
+  
   System structure
 </p>
 
