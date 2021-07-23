@@ -36,6 +36,7 @@ Firebase functions will serve as Webhook of LINE (LINE explain: When an event oc
 ## 3.1 Firebase Functions
 
 https://firebase.google.com/docs/functions/get-started
+https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API/blob/main/reference/%E2%80%9CLINE%20Messaging%20API%E2%80%9D%20x%20%E2%80%9CFirebase%20(Cloud...%2B%20Firestore)%E2%80%9D%20_%20by%20Siratee%20K.pdf
 
 Use the following command to create Functions folder and related documents
 ```cmd
@@ -80,7 +81,7 @@ or
 ```
 $firebase deploy --only "functions:addMessage"
 ```
-Where addMessage is your function name. You can then find the function trigger URL in your Firebase Console (in tab Functions)
+Where addMessage is your function name. You can then find the function trigger URL in your Firebase Console (in tab Functions. URL would look like https://us-central1-projectname-3f2d0.cloudfunctions.net/addMessage)
 
 However, after you deploy, you might encounter error: Forbidden....when you try to call the URL of your functions from the browser. Please follow the following link to solve the problem
 https://lukestoolkit.blogspot.com/2020/06/google-cloud-functions-error-forbidden.html
