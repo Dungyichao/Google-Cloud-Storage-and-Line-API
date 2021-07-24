@@ -225,7 +225,7 @@ Please go through the following link first to setup the Google Cloud Storage. ([
 
 You will be overwhelm by many terms in the Google Cloud Platform. The following image will show you the overview of relationship of bucket, service account, key file
 <p align="center">
-<img src="/image/google_cloud_platform.jpg" height="90%" width="90%">  
+<img src="/image/google_cloud_platform1.jpg" height="90%" width="90%">  
   
   Overview of the Google Cloud Platform and its elements relationship
 </p>
