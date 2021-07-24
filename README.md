@@ -223,15 +223,33 @@ Our next task is to upload some image to the cloud and generate an URL of the im
 
 Please go through the following link first to setup the Google Cloud Storage. ([Document link](https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp))
 
-You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). In the DETAILS of the service account, click on ```SHOW DOMAIN-WIDE DELEGATION``` --> check the ```Enable Google Workspace Domain-wide Delegation``` and SAVE. Then, create a service account key, a JSON key file will be downloaded to your computer. Put that JSON key file into your C# project solution folder. Put the following code in your c# program (at the place after InitializeComponent). I didn't use PowerShell nor Command Prompt because they are not working for my case. 
+## 5.1 Service Account
+You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). In the DETAILS of the service account, click on ```SHOW DOMAIN-WIDE DELEGATION``` --> check the ```Enable Google Workspace Domain-wide Delegation``` and SAVE. You will be assigned with a email for this service account like ```some_service_account_name@gteshwa-3d9870.iam.gserviceaccount.com```.
+
+Then, create a service account key, a JSON key file will be downloaded to your computer. Put that JSON key file into your C# project solution folder. Put the following code in your c# program (at the place after InitializeComponent). I didn't use PowerShell nor Command Prompt because they are not working for my case. 
 ```C#
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\admin\Desktop\SomeProjectSolutionFolder\JsonkeyName-3d9f0-8b3859shyd480.json");
 // this means the json key will represent its identity to access the Google Cloud Storage bucket
 ```
-On the left panel of Google Cloud Platform, you can find ```Cloud Storage``` in the Storage section. Then click ```CREATE BUCKET``` to create a bucket which will be the place to store objects which you uploaded. In the Location type, I would choose ```Region``` because my target LINE user are near me. Then choose ```Standard``` for default storage class. After you create a bucket, now comes the permssions part. First, Remove public access prevention. Second, add the service account you created before to this bucket permission (so that your C# program can access and upload to this bucket). 
 
+## 5.2 Bucket
+On the left panel of Google Cloud Platform, you can find ```Cloud Storage``` in the Storage section. Then click ```CREATE BUCKET``` to create a bucket which will be the place to store objects which you uploaded. In the Location type, I would choose ```Region``` because my target LINE user are near me. Then choose ```Standard``` for default storage class. After you create a bucket, now comes the permssions part. 
+
+### 5.2.1  Permission for Service Account
+First, Remove public access prevention. Second, add the service account you created (use service account email address ```some_service_account_name@gteshwa-3d9870.iam.gserviceaccount.com```) to this bucket permission new Member (so that your C# program can access and upload to this bucket) and make the role to ```Storage Object Admin```. 
+
+### 5.2.2 Permission for Public Viewer
+Add ```allUsers``` as new member and make the role to ```Storage Object Viewer``` so that every LINE user can see the image you send via URL. 
+
+# 6. C# Program Send Image and Text Message
+
+## 6.1 Upload Object to Google Cloud Storage Bucket
 The following C# function will upload object to the new created bucket
 ```C#
+// Call the function to upload image in local PC C:\Users\admin\Desktop\LINE\ATT00001.JPG, name the object ATT00001.JPG
+UploadGoogleDrive("some_service_account_name", @"C:\Users\admin\Desktop\LINE\ATT00001.JPG", "ATT00001.JPG");
+
+//Functions which upload object to bucket
 public void UploadGoogleDrive(string bucketName, string localPath, string objectName)
 {
      var storage = StorageClient.Create();
@@ -242,3 +260,4 @@ public void UploadGoogleDrive(string bucketName, string localPath, string object
       Console.WriteLine($"Uploaded {objectName}.");
 }
 ```
+After you successfully uploaded the object, the URL for this object for public to access will look like ```https://storage.googleapis.com/your_bucket_name/ATT00001.JPG ```
