@@ -249,7 +249,13 @@ First, Remove public access prevention. Second, add the service account you crea
 Add ```allUsers``` as new member and make the role to ```Storage Object Viewer``` so that every LINE user can see the image you send via URL. 
 
 # 6. C# Program Send Image and Text Message to LINE App
-We will now demonstrate how to upload image to Google cloud storage and send text and image message to LINE app.
+We will now demonstrate how to upload image to Google cloud storage and send text and image message to LINE app. Your C# progrm should include following library
+```C#
+using System.IO;
+using Google.Apis.Storage.v1.Data;
+using Google.Cloud.Storage.V1;
+using RestSharp;
+```
 
 ## 6.1 Upload Object to Google Cloud Storage Bucket
 The following C# function will upload object to the new created bucket
