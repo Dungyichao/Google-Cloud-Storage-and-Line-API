@@ -227,4 +227,15 @@ You are required to create a Service account in ```Google Cloud Platform --> IAM
 ```C#
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\admin\Desktop\SomeProjectSolutionFolder\JsonkeyName-3d9f0-8b3859shyd480.json");
 ```
-
+The following C# function will upload object to the new created bucket
+```C#
+public void UploadGoogleDrive(string bucketName, string localPath, string objectName)
+{
+     var storage = StorageClient.Create();
+     using (var fileStream = File.OpenRead(localPath))
+     {
+        storage.UploadObject(bucketName, objectName, null, fileStream);
+      }
+      Console.WriteLine($"Uploaded {objectName}.");
+}
+```
