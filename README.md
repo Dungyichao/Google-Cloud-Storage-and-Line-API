@@ -203,5 +203,9 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
 }'
 ```
 We will use [Postman](https://www.postman.com/) to send the above request for testing if everything working great.
-
+<p align="center">
+<img src="/image/postman.jpg" height="90%" width="90%">  
+  
+  Postman send http request
+</p>
 
