@@ -86,7 +86,7 @@ Where addMessage is your function name. You can then find the function trigger U
 
 However, after you deploy, you might encounter error: Forbidden....when you try to call the URL of your functions in the browser. Please follow the following link to solve the problem
 https://lukestoolkit.blogspot.com/2020/06/google-cloud-functions-error-forbidden.html
-Go to the following link: https://cloud.google.com/functions/list . Select your project. Check the check box of the function which you encounter error. Click on ```ADD MEMBER```. In the new members field, type in "allUsers" and select the "allUsers" option. In the "Select a role" dropdown, select Cloud Functions then Cloud Functions Invoker.
+Go to the following link: https://console.cloud.google.com/functions/list . Select your project. Check the check box of the function which you encounter error. Click on ```ADD MEMBER```. In the new members field, type in "allUsers" and select the "allUsers" option. In the "Select a role" dropdown, select Cloud Functions then Cloud Functions Invoker.
 
 If you get everything right with above addMessage function, you can then deploy the following function. 
 ```javascript
