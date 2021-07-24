@@ -223,10 +223,13 @@ Our next task is to upload some image to the cloud and generate an URL of the im
 
 Please go through the following link first to setup the Google Cloud Storage. ([Document link](https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp))
 
-You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). Then, create a service account key, a JSON key file will be downloaded to your computer. Put that JSON key file into your C# project solution folder. Put the following code in your c# program (at the place after InitializeComponent). I didn't use PowerShell nor Command Prompt because they are not working for my case. 
+You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). In the DETAILS of the service account, click on ```SHOW DOMAIN-WIDE DELEGATION``` --> check the ```Enable Google Workspace Domain-wide Delegation``` and SAVE. Then, create a service account key, a JSON key file will be downloaded to your computer. Put that JSON key file into your C# project solution folder. Put the following code in your c# program (at the place after InitializeComponent). I didn't use PowerShell nor Command Prompt because they are not working for my case. 
 ```C#
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\admin\Desktop\SomeProjectSolutionFolder\JsonkeyName-3d9f0-8b3859shyd480.json");
+// this means the json key will represent its identity to access the Google Cloud Storage bucket
 ```
+On the left panel of Google Cloud Platform, you can find ```Cloud Storage``` in the Storage section. Then click ```CREATE BUCKET``` to create a bucket which will be the place to store objects which you uploaded. In the Location type, I would choose ```Region``` because my target LINE user are near me. Then choose ```Standard``` for default storage class. After you create a bucket, now comes the permssions part. First, Remove public access prevention. Second, add the service account you created before to this bucket permission (so that your C# program can access and upload to this bucket). 
+
 The following C# function will upload object to the new created bucket
 ```C#
 public void UploadGoogleDrive(string bucketName, string localPath, string objectName)
