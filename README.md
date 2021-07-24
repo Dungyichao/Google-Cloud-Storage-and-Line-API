@@ -209,3 +209,15 @@ We will use [Postman](https://www.postman.com/) to send the above request for te
   Postman send http request
 </p>
 
+Sending text message is simple, however, sending image should go through image URL. The request looks like following ([doc](https://developers.line.biz/en/reference/messaging-api/#image-message)). 
+```json
+{
+    "type": "image",
+    "originalContentUrl": "https://example.com/original.jpg",
+    "previewImageUrl": "https://example.com/preview.jpg"
+}
+```
+Our next task is to upload some image to the cloud and generate an URL of the image so that we can send the URL to LINE user.
+
+# 5. Google Cloud Storage
+
