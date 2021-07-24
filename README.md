@@ -219,9 +219,16 @@ Sending text message is simple, however, sending image should go through image U
 ```
 Our next task is to upload some image to the cloud and generate an URL of the image so that we can send the URL to LINE user.
 
-# 5. Google Cloud Storage
+# 5. Google Cloud Storage and Platform Configuration
 
 Please go through the following link first to setup the Google Cloud Storage. ([Document link](https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp))
+
+You will be overwhelm by many terms in the Google Cloud Platform. The following image will show you the overview of relationship of bucket, service account, key file
+<p align="center">
+<img src="/image/google_cloud_platform.jpg" height="90%" width="90%">  
+  
+  Overview of the Google Cloud Platform and its elements relationship
+</p>
 
 ## 5.1 Service Account
 You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). In the DETAILS of the service account, click on ```SHOW DOMAIN-WIDE DELEGATION``` --> check the ```Enable Google Workspace Domain-wide Delegation``` and SAVE. You will be assigned with a email for this service account like ```some_service_account_name@gteshwa-3d9870.iam.gserviceaccount.com```.
