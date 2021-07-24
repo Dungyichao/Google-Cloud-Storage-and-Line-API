@@ -202,7 +202,7 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
     ]
 }'
 ```
-We will use [Postman](https://www.postman.com/) to send the above request for testing if everything working great.
+We will use [Postman](https://www.postman.com/) to send the above request for testing if everything working great. LINE user should receive ```Hello, world1``` from the channel.
 <p align="center">
 <img src="/image/postman.jpg" height="100%" width="100%">  
   
