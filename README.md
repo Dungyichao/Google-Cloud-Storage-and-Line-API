@@ -241,7 +241,8 @@ First, Remove public access prevention. Second, add the service account you crea
 ### 5.2.2 Permission for Public Viewer
 Add ```allUsers``` as new member and make the role to ```Storage Object Viewer``` so that every LINE user can see the image you send via URL. 
 
-# 6. C# Program Send Image and Text Message
+# 6. C# Program Send Image and Text Message to LINE App
+We will now demonstrate how to upload image to Google cloud storage and send text and image message to LINE app.
 
 ## 6.1 Upload Object to Google Cloud Storage Bucket
 The following C# function will upload object to the new created bucket
@@ -261,3 +262,20 @@ public void UploadGoogleDrive(string bucketName, string localPath, string object
 }
 ```
 After you successfully uploaded the object, the URL for this object for public to access will look like ```https://storage.googleapis.com/your_bucket_name/ATT00001.JPG ```
+
+## 6.2 Send Text Message in LINE App
+```C#
+public void LINE_Send_Text()
+        {
+            string send_string = "Some string";
+            var client = new RestClient("https://api.line.me/v2/bot/message/multicast");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Authorization", "Bearer pb2iNzDae3dfP5igReOzv8Rpcdsgrahnw0eH2LAe4/WLXuvJrgN/VcOGLAe69wDiaHL7wPvFfsda35ldsasdfqCaXjs4wB04t89/1O/w1cDnyilFU=");
+            string body2 = String.Format("{{\"to\": [\"U4d709010e49a0f83634p70cf1a0e0a76\"], \"messages\":[{{\"type\":\"text\",\"text\":\"{0}\"}}]}}", send_string);
+            request.AddParameter("application/json", body2, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Console.WriteLine(response.Content);
+        }
+```
