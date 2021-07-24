@@ -1,9 +1,9 @@
 # Sending LINE message with Google Cloud Storage and Line API
-1. [What is the Goal](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#1-what-is-the-goal-)
+1. [What is the Goal](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#1-what-is-the-goal-): Overview, Steps
 2. [LINE Developer Console Configuration](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#2-line-developer-console-configuration)
-3. [Firebase Functions and Firestore Database](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#3-firebase-functions-and-firestore-database)
+3. [Firebase Functions and Firestore Database](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#3-firebase-functions-and-firestore-database): Firestore, Functions, LINE Webhook settings
 4. [LINE Chat and Postman Testing](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#4-line-chat-and-postman-testing)
-5. [Google Cloud Storage and Platform Configuration](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#5-google-cloud-storage-and-platform-configuration)
+5. [Google Cloud Storage and Platform Configuration](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#5-google-cloud-storage-and-platform-configuration): Service Account, Bucket, Permission
 6. [C# Program Send Image and Text Message to LINE App](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#6-c-program-send-image-and-text-message-to-line-app)
 
 
