@@ -221,3 +221,10 @@ Our next task is to upload some image to the cloud and generate an URL of the im
 
 # 5. Google Cloud Storage
 
+Please go through the following link first to setup the Google Cloud Storage. ([Document link](https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-csharp))
+
+You are required to create a Service account in ```Google Cloud Platform --> IAM & Admin --> Service Accounts``` (Google explain: A service account represents a Google Cloud service identity, such as code running on Compute Engine VMs, App Engine apps, or systems running outside Google). Then, create a service account key, a JSON key file will be downloaded to your computer. Put that JSON key file into your C# project solution folder. Put the following code in your c# program (at the place after InitializeComponent). I didn't use PowerShell nor Command Prompt because they are not working for my case. 
+```C#
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\admin\Desktop\SomeProjectSolutionFolder\JsonkeyName-3d9f0-8b3859shyd480.json");
+```
+
