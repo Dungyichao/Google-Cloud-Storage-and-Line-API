@@ -257,8 +257,8 @@ public void UploadGoogleDrive(string bucketName, string localPath, string object
      using (var fileStream = File.OpenRead(localPath))
      {
         storage.UploadObject(bucketName, objectName, null, fileStream);
-      }
-      Console.WriteLine($"Uploaded {objectName}.");
+     }
+     Console.WriteLine($"Uploaded {objectName}.");
 }
 ```
 After you successfully uploaded the object, the URL for this object for public to access will look like ```https://storage.googleapis.com/your_bucket_name/ATT00001.JPG ```
@@ -266,16 +266,34 @@ After you successfully uploaded the object, the URL for this object for public t
 ## 6.2 Send Text Message in LINE App
 ```C#
 public void LINE_Send_Text()
+{
+   string send_string = "Some string";
+   var client = new RestClient("https://api.line.me/v2/bot/message/multicast");
+   client.Timeout = -1;
+   var request = new RestRequest(Method.POST);
+   request.AddHeader("Content-Type", "application/json");
+   request.AddHeader("Authorization", "Bearer pb2iNzDae3dfP5igReOzv8Rpcdsgrahnw0eH2LAe4/WLXuvJrgN/VcOGLAe69wDiaHL7wPvFfsda35ldsasdfqCaXjs4wB04t89/1O/w1cDnyilFU=");
+   string body2 = String.Format("{{\"to\": [\"U4d709010e49a0f83634p70cf1a0e0a76\"], \"messages\":[{{\"type\":\"text\",\"text\":\"{0}\"}}]}}", send_string);
+   request.AddParameter("application/json", body2, ParameterType.RequestBody);
+   IRestResponse response = client.Execute(request);
+   Console.WriteLine(response.Content);
+}
+```
+
+## 6.3 Send Image Message in LINE App
+```C#
+public void Postman_img()
         {
-            string send_string = "Some string";
+            string send_string = "https://storage.googleapis.com/your_bucket_name/ATT00001.JPG";
             var client = new RestClient("https://api.line.me/v2/bot/message/multicast");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Authorization", "Bearer pb2iNzDae3dfP5igReOzv8Rpcdsgrahnw0eH2LAe4/WLXuvJrgN/VcOGLAe69wDiaHL7wPvFfsda35ldsasdfqCaXjs4wB04t89/1O/w1cDnyilFU=");
-            string body2 = String.Format("{{\"to\": [\"U4d709010e49a0f83634p70cf1a0e0a76\"], \"messages\":[{{\"type\":\"text\",\"text\":\"{0}\"}}]}}", send_string);
+            request.AddHeader("Authorization", "Bearer pb2iNzDae3dfP5igReOzv8Rpcdsgrahnw0eH2LAe4/WLXuvJrgN/VcOGLAe69wDiaHL7wPvFfsda35ldsasdfqCaXjs4wB04t89/1O/w1cDnyilFU=");           
+            string body2 = String.Format("{{\"to\": [\"U4d709010e49a0f83634p70cf1a0e0a76\"], \"messages\":[{{\"type\":\"image\",\"originalContentUrl\":\"{0}\",\"previewImageUrl\":\"{0}\"}}]}}", send_string);
             request.AddParameter("application/json", body2, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
             Console.WriteLine(response.Content);
         }
 ```
+
