@@ -1,4 +1,13 @@
 # Sending LINE message with Google Cloud Storage and Line API
+1. [What is the Goal](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#1-what-is-the-goal-)
+2. [LINE Developer Console Configuration](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#2-line-developer-console-configuration)
+3. [Firebase Functions and Firestore Database](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#3-firebase-functions-and-firestore-database)
+4. [LINE Chat and Postman Testing](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#4-line-chat-and-postman-testing)
+5. [Google Cloud Storage and Platform Configuration](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#5-google-cloud-storage-and-platform-configuration)
+6. [C# Program Send Image and Text Message to LINE App](https://github.com/Dungyichao/Google-Cloud-Storage-and-Line-API#6-c-program-send-image-and-text-message-to-line-app)
+
+
+
 # 1. What is the Goal <br />
 
 The main goal is to use C# program to send image or text message to LINE app chat room. Firebase and Google Cloud Storage will also be involved to achieve the goal. Some useful official documentary links are listed below
