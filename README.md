@@ -40,7 +40,7 @@ Please go through following two link
 
 ## 3.1 Firestore Database
 <p align="center">
-<img src="/image/firestore.jpg" height="90%" width="90%">  
+<img src="/image/firestore1.jpg" height="90%" width="90%">  
   
   Firestore database
 </p>
