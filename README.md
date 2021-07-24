@@ -185,23 +185,23 @@ After you complete above section, use your LINE app on your cellphone and add (H
 
 In LINE Developers documents about Message API --> Message --> Send push message ([link](https://developers.line.biz/en/reference/messaging-api/#send-push-message)). A example request looks like the following
 ```Shell
-curl -v -X POST https://api.line.me/v2/bot/message/reply \
+curl -v -X POST https://api.line.me/v2/bot/message/push \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer {channel access token}' \
 -d '{
-    "replyToken":"nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
+    "to": "U4d709010e49a0f83634p70cf1a0e0a76",
     "messages":[
         {
             "type":"text",
-            "text":"Hello, user"
+            "text":"Hello, world1"
         },
         {
             "type":"text",
-            "text":"May I help you?"
+            "text":"Hello, world2"
         }
     ]
 }'
 ```
-
+We will use [Postman](https://www.postman.com/) to send the above request for testing if everything working great.
 
 
