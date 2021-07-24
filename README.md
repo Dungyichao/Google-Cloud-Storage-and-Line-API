@@ -31,7 +31,7 @@ https://developers.line.biz/en/docs/messaging-api/getting-started/
 I would set the Auto-response messages status (In Response settings) to Off. 
 
 # 3. Firebase Functions and Firestore Database
-Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL).
+Firebase functions will serve as Webhook of LINE (LINE explain: When an event occurs, such as when a user adds your LINE Official Account as a friend or sends a message, the LINE Platform sends an HTTPS POST request to the webhook URL). Notice that using ```Firestore``` database is free while ```Functions``` requires your project to be upgraded to ```Blaze``` plan (pay by your usage)
 
 ## 3.1 Firebase Functions
 Please go through following two link
@@ -84,7 +84,7 @@ $firebase deploy --only "functions:addMessage"
 ```
 Where addMessage is your function name. You can then find the function trigger URL in your Firebase Console (in tab Functions. URL would look like https://us-central1-projectname-3f2d0.cloudfunctions.net/addMessage)
 
-However, after you deploy, you might encounter error: Forbidden....when you try to call the URL of your functions from the browser. Please follow the following link to solve the problem
+However, after you deploy, you might encounter error: Forbidden....when you try to call the URL of your functions in the browser. Please follow the following link to solve the problem
 https://lukestoolkit.blogspot.com/2020/06/google-cloud-functions-error-forbidden.html
 Go to the following link: https://cloud.google.com/functions/list . Select your project. Check the check box of the function which you encounter error. Click on ```ADD MEMBER```. In the new members field, type in "allUsers" and select the "allUsers" option. In the "Select a role" dropdown, select Cloud Functions then Cloud Functions Invoker.
 
