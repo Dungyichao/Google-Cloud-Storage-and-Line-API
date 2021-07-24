@@ -169,5 +169,5 @@ Make sure that the above function ```LineMessAPI``` be accessible to public (we 
 <p align="center">
 <img src="/image/webhook_setting.jpg" height="90%" width="90%">  
   
-  Webhook settings
+  Webhook settings in LINE Developer Console
 </p>
