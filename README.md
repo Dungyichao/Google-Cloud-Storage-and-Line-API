@@ -88,7 +88,7 @@ However, after you deploy, you might encounter error: Forbidden....when you try 
 https://lukestoolkit.blogspot.com/2020/06/google-cloud-functions-error-forbidden.html
 Go to the following link: https://console.cloud.google.com/functions/list . Select your project. Check the check box of the function which you encounter error. Click on ```ADD MEMBER```. In the new members field, type in "allUsers" and select the "allUsers" option. In the "Select a role" dropdown, select Cloud Functions then Cloud Functions Invoker.
 
-If you get everything right with above addMessage function, you can then deploy the following function. 
+If you get everything right with above addMessage function, you can then deploy the following code onto Firebase Function. 
 ```javascript
 const functions = require("firebase-functions");
 const fetch = require("node-fetch");
@@ -164,3 +164,10 @@ function reply_message(replytoken,textfrom){
 }
 ```
 Note that in ```"Authorization": "Bearer XXOOXX``` where XXOOXX is Channel access token configured in LINE Developer Console mentioned in previous section. You should keep the Channel access token secure.
+
+Make sure that the above function ```LineMessAPI``` be accessible to public (we did'nt put much effort on the security here, so make sure you know how to configure rule when deploy in real business). Put the LineMessAPI URL into ```Webhook URL``` in LINE Developer Console under the channel you just created.
+<p align="center">
+<img src="/image/webhook_setting.jpg" height="90%" width="90%">  
+  
+  Webhook settings
+</p>
