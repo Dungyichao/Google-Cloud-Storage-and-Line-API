@@ -179,3 +179,29 @@ Make sure that the above function ```LineMessAPI``` be accessible to public (we 
   
   Webhook settings in LINE Developer Console
 </p>
+
+# 4. LINE Chat and Postman Testing
+After you complete above section, use your LINE app on your cellphone and add (Home --> Add Friend --> QR code --> Scan the channel QR code) the newly created channel. You will then receive a auto reply message from the channel. At the same time, LINE also trigger the Webhook URL, so our function ```LineMessAPI```  should be recording the LINE user ID (for example: U4d709010e49a0f83634p70cf1a0e0a76)who just add the channel to friend.
+
+In LINE Developers documents about Message API --> Message --> Send push message ([link](https://developers.line.biz/en/reference/messaging-api/#send-push-message)). A example request looks like the following
+```Shell
+curl -v -X POST https://api.line.me/v2/bot/message/reply \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer {channel access token}' \
+-d '{
+    "replyToken":"nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
+    "messages":[
+        {
+            "type":"text",
+            "text":"Hello, user"
+        },
+        {
+            "type":"text",
+            "text":"May I help you?"
+        }
+    ]
+}'
+```
+
+
+
