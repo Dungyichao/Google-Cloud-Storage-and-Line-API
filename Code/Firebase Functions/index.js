@@ -168,18 +168,29 @@ exports.ITLineMessAPI = functions.https.onRequest(async (request, respond) => {
     var all_keyword = temp_data[1];
     var text_mentioned_keywords = "";
 
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/RegExp
+    var regEx = new RegExp(`\\b(${all_keyword.join("|")})\\b`, "gi"); 
+    var match_result;
+
     //functions.logger.log(all_userID);
     //functions.logger.log(all_keyword);
     //functions.logger.log(userText);
 
     if(!all_userID.includes(userId)){
         var keyword_match_count = 0;
-        all_keyword.forEach((keyword) => {
-            if(userText.includes(keyword)){
-                text_mentioned_keywords += keyword + ",";
-                keyword_match_count++;               
-            }
-        })
+        match_result = userText.match(regEx);
+
+        if(match_result == null){
+          keyword_match_count = 0;
+        }
+        else{
+          match_result.forEach((match_word) => {
+            text_mentioned_keywords += match_word + ",";
+          })
+          keyword_match_count = match_result.length;
+        }
+
+        
         if(keyword_match_count > 0){
             //reply_message(replyToken, "IT Please Help");
             multicast_message(all_userID, "IT Help: "+ text_mentioned_keywords + ", --Original Text: " + userText);      
@@ -188,12 +199,19 @@ exports.ITLineMessAPI = functions.https.onRequest(async (request, respond) => {
     else{
         //reply_message(replyToken, "Inside Department User Message");
         var keyword_match_count = 0;
-        all_keyword.forEach((keyword) => {
-            if(userText.toLowerCase().includes(keyword)){
-                text_mentioned_keywords += keyword + ",";
-                keyword_match_count++;               
-            }
-        })
+        match_result = userText.match(regEx);
+
+        if(match_result == null){
+          keyword_match_count = 0;
+        }
+        else{
+          match_result.forEach((match_word) => {
+            text_mentioned_keywords += match_word + ",";
+          })
+          keyword_match_count = match_result.length;
+        }
+
+        
         if(keyword_match_count > 0){
             //reply_message(replyToken, "IT Please Help");
             multicast_message(all_userID, "IT Replied: " + text_mentioned_keywords + ", --Original Text: " + userText);        
